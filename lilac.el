@@ -10,16 +10,30 @@
 (add-to-list 'load-path "~/.emacs.d/lilac")
 (load "lsp")
 
+(use-package format-all
+  :ensure t
+  :init
+  (add-hook 'prog-mode-hook 'format-all-mode)
+  )
+
+(use-package tramp
+  :ensure t
+  :init
+  (setq tramp-default-method "ssh")
+  )
+
 (use-package magit
   :ensure t
   :init
-)
+  )
 
 (use-package projectile
   :ensure t
   :init
   (projectile-mode +1)
   (setq projectile-sort-order 'recently-active)
+  (setq projectile-enable-caching nil)
+  (setq projectile-file-exists-remote-cache-expire nil)
   )
 
 (use-package zenburn-theme
@@ -110,6 +124,8 @@
   ;; magit
   (evil-define-key '(normal motion visual) 'global (kbd "<leader>g") 'magit-dispatch-popup)
   ;;(global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
+  ;; code format
+  (evil-define-key '(normal motion visual) 'global (kbd "C-=") 'format-all-buffer)
   )
 
 (use-package key-chord
@@ -157,10 +173,29 @@
 (set-frame-size (selected-frame) 1600 900 t)
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message nil)
+(set-default 'truncate-lines nil)
+;; show number on prog-mode
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+;;indent
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq c-default-style "linux"
+      c-basic-offset 4)
 ;;(set-fringe-mode left-only) ; Space at edges
 ;;(fringe-mode "left-only")
 (fringe-mode '(10 . 0))
-(set-face-attribute 'default nil :font "DejaVuSansMono" :height 120)
+;;(set-face-attribute 'default nil :font "DejaVuSansMono" :height 120)
+(set-face-attribute 'default nil :font "Terminus (TTF)" :height 120)
+
+;; Write backups to ~/.emacs.d/backup/
+(setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
+      backup-by-copying      t  ; Don't de-link hard links
+      version-control        t  ; Use version numbers on backups
+      delete-old-versions    t  ; Automatically delete excess backups:
+      kept-new-versions      20 ; how many of the newest versions to keep
+      kept-old-versions      5) ; and how many of the old
+(setq auto-save-file-name-transforms
+      `((".*" , "~/.emacs.d/auto-save-list" t)))
 
 
 ;;(load-theme 'wheatgrass)
