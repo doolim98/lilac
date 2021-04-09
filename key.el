@@ -1,3 +1,27 @@
+;; my evil
+;; removed vim key
+
+;; normal mode
+;; y -> C-c
+;; undo -> C-z
+;; redo -> C-S-z
+;; p -> C-v 
+;; q -> visual mode exit
+;; C-q -> macro
+;; d -> scroll down
+;; u -> scroll up
+;; Enter -> zz 
+;; vvvvv -> expand
+;; p for project
+
+;; number for move window
+;; tab for alt window
+
+
+;; insert mode
+
+
+
 (require 'evil)
 (require 'key-chord)
 ;;(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)

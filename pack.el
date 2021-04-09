@@ -34,6 +34,12 @@
   :init
   )
 
+(use-package evil-commentary
+  :ensure t
+  :init
+  (evil-commentary-mode)
+  )
+
 (use-package popwin
   :ensure t
   :init
@@ -62,6 +68,7 @@
   :ensure t
   ;;:disabled
   :init
+  (setq x-select-enable-clipboard nil)
   (evil-mode)
 
   ;; always use evil mode
